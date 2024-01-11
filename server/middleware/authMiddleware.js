@@ -1,3 +1,4 @@
+// декадирование токена и проверка на валидность
 const jwt = require('jsonwebtoken')
 
 module.exports = function (req, res, next) {

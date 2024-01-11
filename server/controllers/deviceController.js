@@ -36,6 +36,7 @@ class DeviceController {
         limit = limit || 9
         let offset = page * limit - limit
         let devices;
+        // фильтрация и пагинация
         if (!brandId && !typeId) {
             devices = await Device.findAndCountAll({limit, offset})
         }

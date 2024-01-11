@@ -1,3 +1,4 @@
+// Подключение к БД
 const {Sequelize} = require('sequelize')
 
 module.exports = new Sequelize(

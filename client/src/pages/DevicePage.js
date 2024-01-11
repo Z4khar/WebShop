@@ -3,6 +3,7 @@ import {Button, Card, Col, Container, Image, Row} from "react-bootstrap";
 import bigStar from '../assets/bigStar.png'
 import {useParams} from 'react-router-dom'
 import {fetchOneDevice} from "../http/deviceAPI";
+import axios from 'axios';
 
 const DevicePage = () => {
     const [device, setDevice] = useState({info: []})
@@ -10,6 +11,17 @@ const DevicePage = () => {
     useEffect(() => {
         fetchOneDevice(id).then(data => setDevice(data))
     }, [])
+
+    const addBasket = async () => {
+        console.log(id)
+        axios.post('http://localhost:5000/api/basket/basketCreate', {
+            device_id: id,
+            user_id: 1
+          })
+          .then(function (response) {
+            console.log(response);
+          })
+    }
 
     return (
         <Container className="mt-3">
@@ -33,8 +45,10 @@ const DevicePage = () => {
                         className="d-flex flex-column align-items-center justify-content-around"
                         style={{width: 300, height: 300, fontSize: 32, border: '5px solid lightgray'}}
                     >
-                        <h3>От: {device.price} руб.</h3>
-                        <Button variant={"outline-dark"}>Добавить в корзину</Button>
+                        <h3> {device.price} руб.</h3>
+                        <Button 
+                            variant={"outline-dark"}
+                            onClick={addBasket}>Добавить в корзину</Button>
                     </Card>
                 </Col>
             </Row>
